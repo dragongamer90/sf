@@ -47,6 +47,11 @@ public class Vector2D {
 		return (float) (Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2)));
 	}
 	
+	public void normalize() {
+		x = x/mag();
+		y = y/mag();
+	}
+	
 	/**
 	 * if there is an intersection, returns the point, else returns null
 	 * @param start
