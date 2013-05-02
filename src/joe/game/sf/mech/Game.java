@@ -66,6 +66,11 @@ public class Game {
 				    p.getPlayerRadius(),
 				    p.getPlayerRadius(),
 				    null);
+			g.setColor(Color.WHITE);
+			g.drawLine((int)p.getLocation().getX(),
+					   (int)p.getLocation().getY(), 
+					   (int)p.getLocation().getX() + (int)p.getDirection().getX()*10, 
+					   (int)p.getLocation().getY() + (int)p.getDirection().getY()*19);
 		}
 		
 	}
