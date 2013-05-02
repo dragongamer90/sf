@@ -103,6 +103,8 @@ public class Screen extends JPanel implements Runnable {
 			case 'a': {game.setLeft(true);}break;
 			case 's': {game.setDown(true);}break;
 			case 'd': {game.setRight(true);}break;
+			case 'k': {game.setTurnRight(true);}break;
+			case 'l': {game.setTurnLeft(true);}break;
 			}
 		}
 
@@ -113,6 +115,8 @@ public class Screen extends JPanel implements Runnable {
 			case 'a': {game.setLeft(false);}break;
 			case 's': {game.setDown(false);}break;
 			case 'd': {game.setRight(false);}break;
+			case 'k': {game.setTurnRight(false);}break;
+			case 'l': {game.setTurnLeft(false);}break;
 			}
 		}
 

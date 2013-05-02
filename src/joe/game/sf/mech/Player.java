@@ -2,7 +2,7 @@ package joe.game.sf.mech;
 
 public class Player {
 	private Vector2D accelaration, velocity, location, direction;
-	private float walkAcc, directionAngle, turnSpeed;
+	private float walkAcc, directionAngle, turnSpeed, pi2;
 	private int playerRadius;
 	private boolean dead;
 	
@@ -11,8 +11,9 @@ public class Player {
 		location = new Vector2D(x, y);
 		velocity = new Vector2D(0, 0);
 		accelaration = new Vector2D(0, 0);
+		pi2 = (float) (Math.PI*2);
 		walkAcc = 0.6f;
-		directionAngle = 0;
+		directionAngle = 1;
 		turnSpeed = 0.5f;
 		this.playerRadius = 50;
 	}
@@ -25,7 +26,7 @@ public class Player {
 		location.add(velocity);
 		accelaration.mult(0);
 		direction.setX((float) Math.sin(directionAngle));
-		direction.setY((float) Math.cos(directionAngle));
+		direction.setY(-(float) Math.cos(directionAngle));
 		direction.normalize();
 	}
 	
@@ -114,10 +115,16 @@ public class Player {
 	
 	public void turnLeft() {
 		directionAngle -= turnSpeed;
+		if(directionAngle < 0) {
+			directionAngle = pi2;
+		}
 	}
 	
 	public void turnRight() {
 		directionAngle += turnSpeed;
+		if(directionAngle > pi2) {
+			directionAngle = 0;
+		}
 	}
 
 	/**

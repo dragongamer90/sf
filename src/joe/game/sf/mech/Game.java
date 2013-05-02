@@ -9,7 +9,7 @@ public class Game {
 	
 	private int width, height, mouseX, mouseY;
 	Player[] players = {new Player(1,1,1), new Player(1,1,1)};
-	private boolean left, right, up, down;
+	private boolean left, right, up, down, turnRight, turnLeft;
 	private float frictionCoeff = -0.1f;
 	
 	/**
@@ -43,6 +43,12 @@ public class Game {
 		if(left) {
 			players[0].moveLeft();
 		}
+		if(turnLeft) {
+			players[0].turnLeft();
+		}
+		if(turnRight) {
+			players[0].turnRight();
+		}
 	}
 	
 	public void boom() {
@@ -69,8 +75,8 @@ public class Game {
 			g.setColor(Color.WHITE);
 			g.drawLine((int)p.getLocation().getX(),
 					   (int)p.getLocation().getY(), 
-					   (int)p.getLocation().getX() + (int)p.getDirection().getX()*10, 
-					   (int)p.getLocation().getY() + (int)p.getDirection().getY()*19);
+					   (int)p.getLocation().getX() + (int)p.getDirection().getX()*20, 
+					   (int)p.getLocation().getY() + (int)p.getDirection().getY()*20);
 		}
 		
 	}
@@ -199,5 +205,61 @@ public class Game {
 	 */
 	public void setDown(boolean down) {
 		this.down = down;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	/**
+	 * @param players the players to set
+	 */
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
+
+	/**
+	 * @return the turnRight
+	 */
+	public boolean isTurnRight() {
+		return turnRight;
+	}
+
+	/**
+	 * @param turnRight the turnRight to set
+	 */
+	public void setTurnRight(boolean turnRight) {
+		this.turnRight = turnRight;
+	}
+
+	/**
+	 * @return the turnLeft
+	 */
+	public boolean isTurnLeft() {
+		return turnLeft;
+	}
+
+	/**
+	 * @param turnLeft the turnLeft to set
+	 */
+	public void setTurnLeft(boolean turnLeft) {
+		this.turnLeft = turnLeft;
+	}
+
+	/**
+	 * @return the frictionCoeff
+	 */
+	public float getFrictionCoeff() {
+		return frictionCoeff;
+	}
+
+	/**
+	 * @param frictionCoeff the frictionCoeff to set
+	 */
+	public void setFrictionCoeff(float frictionCoeff) {
+		this.frictionCoeff = frictionCoeff;
 	}
 }
