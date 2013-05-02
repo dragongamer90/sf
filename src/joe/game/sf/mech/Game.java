@@ -8,7 +8,7 @@ import joe.game.sf.ImageBank;
 public class Game {
 	
 	private int width, height, mouseX, mouseY;
-	Player p1, p2;
+	Player[] players = {new Player(1,1,1), new Player(1,1,1)};
 	private boolean left, right, up, down;
 	private float frictionCoeff = -0.1f;
 	
@@ -20,32 +20,33 @@ public class Game {
 		super();
 		this.width = width;
 		this.height = height;
-		p1 = new Player(1,1,1);
 	}
 
 	public void update () {
 		processInput();
-		applyFriction(p1);
-		p1.update();
+		applyFriction(players[0]);
+		for(Player p : players) {
+			p.update();
+		}
 	}
 	
 	public void processInput() {
 		if(up) {
-			p1.moveUp();
+			players[0].moveUp();
 		}
 		if(down) {
-			p1.movedown();
+			players[0].movedown();
 		}
 		if(right) {
-			p1.moveRight();
+			players[0].moveRight();
 		}
 		if(left) {
-			p1.moveLeft();
+			players[0].moveLeft();
 		}
 	}
 	
 	public void boom() {
-		p1.applyForce(new Vector2D(-50, 1));
+		players[0].applyForce(new Vector2D(-50, 1));
 	}
 	
 	public void applyFriction(Player p) {
@@ -57,12 +58,16 @@ public class Game {
 	public void render(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
-		g.drawImage(ImageBank.getImage("blue"), 
-					(int)p1.getLocation().getX()-(p1.getPlayerRadius())/2,
-				   (int)p1.getLocation().getY()-(p1.getPlayerRadius())/2,
-				   p1.getPlayerRadius(),
-				   p1.getPlayerRadius(),
-				   null);
+		
+		for(Player p : players) {
+			g.drawImage(ImageBank.getImage("blue"), 
+					(int)p.getLocation().getX()-(p.getPlayerRadius())/2,
+				    (int)p.getLocation().getY()-(p.getPlayerRadius())/2,
+				    p.getPlayerRadius(),
+				    p.getPlayerRadius(),
+				    null);
+		}
+		
 	}
 
 	/**
@@ -122,33 +127,19 @@ public class Game {
 	}
 
 	/**
-	 * @return the p1
+	 * @return the players[0]
 	 */
-	public Player getP1() {
-		return p1;
+	public Player[] getplayers() {
+		return players;
 	}
 
 	/**
-	 * @param p1 the p1 to set
+	 * @param players[0] the players[0] to set
 	 */
-	public void setP1(Player p1) {
-		this.p1 = p1;
+	public void setplayers(Player[] players) {
+		this.players = players;
 	}
-
-	/**
-	 * @return the p2
-	 */
-	public Player getP2() {
-		return p2;
-	}
-
-	/**
-	 * @param p2 the p2 to set
-	 */
-	public void setP2(Player p2) {
-		this.p2 = p2;
-	}
-
+	
 	/**
 	 * @return the left
 	 */
