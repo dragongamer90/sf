@@ -66,19 +66,24 @@ public class Game {
 		g.fillRect(0, 0, width, height);
 		
 		for(Player p : players) {
-			g.drawImage(ImageBank.getImage("blue"), 
-					(int)p.getLocation().getX()-(p.getPlayerRadius())/2,
-				    (int)p.getLocation().getY()-(p.getPlayerRadius())/2,
-				    p.getPlayerRadius(),
-				    p.getPlayerRadius(),
-				    null);
-			g.setColor(Color.WHITE);
-			g.drawLine((int)p.getLocation().getX(),
-					   (int)p.getLocation().getY(), 
-					   (int)p.getLocation().getX() + (int)p.getDirection().getX()*20, 
-					   (int)p.getLocation().getY() + (int)p.getDirection().getY()*20);
+			if(!p.isDead()) {
+				g.drawImage(ImageBank.getImage("blue"), 
+						(int)p.getLocation().getX()-(p.getPlayerRadius())/2,
+					    (int)p.getLocation().getY()-(p.getPlayerRadius())/2,
+					    p.getPlayerRadius(),
+					    p.getPlayerRadius(),
+					    null);
+				g.setColor(Color.WHITE);
+				g.drawLine((int)p.getLocation().getX(),
+						   (int)p.getLocation().getY(), 
+						   (int)p.getLocation().getX() + (int)(p.getDirection().getX()*20), 
+						   (int)p.getLocation().getY() + (int)(p.getDirection().getY()*20));
+			}
 		}
-		
+	}
+	
+	public void shoot() {
+		players[0].shoot(players, 0);
 	}
 
 	/**

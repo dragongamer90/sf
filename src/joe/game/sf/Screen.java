@@ -105,6 +105,7 @@ public class Screen extends JPanel implements Runnable {
 			case 'd': {game.setRight(true);}break;
 			case 'k': {game.setTurnRight(true);}break;
 			case 'l': {game.setTurnLeft(true);}break;
+			case 'j': {game.shoot();}break;
 			}
 		}
 
@@ -122,9 +123,7 @@ public class Screen extends JPanel implements Runnable {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			if(e.getKeyChar() == 'f') {
-				game.boom();
-			}
+			
 		}
 	}
 }

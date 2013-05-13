@@ -12,9 +12,9 @@ public class Player {
 		velocity = new Vector2D(0, 0);
 		accelaration = new Vector2D(0, 0);
 		pi2 = (float) (Math.PI*2);
-		walkAcc = 0.6f;
+		walkAcc = 0.4f;
 		directionAngle = 1;
-		turnSpeed = 0.5f;
+		turnSpeed = 0.2f;
 		this.playerRadius = 50;
 	}
 	
@@ -26,7 +26,7 @@ public class Player {
 		location.add(velocity);
 		accelaration.mult(0);
 		direction.setX((float) Math.sin(directionAngle));
-		direction.setY(-(float) Math.cos(directionAngle));
+		direction.setY((float) Math.cos(directionAngle));
 		direction.normalize();
 	}
 	
@@ -34,10 +34,12 @@ public class Player {
 	 * shoots a bullet straight in the direction of the player
 	 * @param players
 	 */
-	public void shoot (Player[] players) {
+	public void shoot (Player[] players, int self) {
 		for(int i=0; i<players.length; i++) {
-			if(Vector2D.lineCircle(location, Vector2D.add(location, Vector2D.mult(direction, 10)), players[i].getLocation(), players[i].getPlayerRadius()) != null){
+			Vector2D intersection = Vector2D.lineCircle(location, Vector2D.add(location, Vector2D.mult(direction, 10)), players[i].getLocation(), players[i].getPlayerRadius());
+			if(intersection != null && i!=self){
 				players[i].die();
+				System.out.format("%f, %f\n", intersection.getX(), intersection.getY());
 			}
 		}
 	}
