@@ -7,7 +7,7 @@ Idea
 ----
 
 I am trying to create an environment different to that of Call of Duty and Battlefield 3. (Not in the 2D/3D sense)
-In thease games players run around chaotically and work by themselves to increase their stats. This game
+In thease games, players run around chaotically and work by themselves to increase their stats. This game
 will focus on encouraging team cooperation by introducing aspects such as permadeath and physical game play
 being effected by team member deaths.
 
