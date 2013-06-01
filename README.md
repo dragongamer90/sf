@@ -13,7 +13,7 @@ being effected by team member deaths.
 
 * The game tries to trigger an emotional response in the player in a number of ways
   * By having the death of your team mates effect the gameplay by manipulating both the graphics and audio
-  * By having game modes where there is an option other than extermination of the enemy team members to achieve victory
+  * By having game modes where there is an option other than extermination of enemy team members to achieve victory
 
 * The game encourages team cooperation, it almost makes it a necessity  
 
