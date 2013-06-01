@@ -60,16 +60,38 @@ public class Vector2D {
 	 * @param radius
 	 * @return
 	 */
-	public static Vector2D lineCircle(Vector2D start, Vector2D end, Vector2D center, float radius) {
+	public static boolean lineCircle(Vector2D start, Vector2D end, Vector2D center, float radius) {
 		Vector2D d = Vector2D.sub(end, start);
-		float a = d.getX() / d.getY();
-		float y = (float) Math.sqrt(Math.pow(radius, 2)/a + 1);
-		float x = a * y;
-		if (Float.isNaN(x) || Float.isNaN(y)) {
-			return null;
-		}else{
-			return new Vector2D(x+center.getX(), y+center.getY());
+		Vector2D intersection;
+		
+		if(d.isVerticle()) {
+			intersection = new Vector2D(d.x, center.y);
+		}else if(d.isHorizontal()) {
+			intersection = new Vector2D(center.x, d.y);
+		}else {
+			Vector2D p = d.perp();
+			Vector2D p1, p2, p3, p4;
+			p1 = start;
+			p2 = end;
+			p3 = center;
+			p4 = Vector2D.add(center, p);
+			intersection = null;
+			float xNum = ((p1.x*p2.y-p1.y*p2.x)*(p3.x-p4.x))-((p1.x-p2.x)*(p3.x*p4.y-p3.y*p4.x));
+			float xDenom = ((p1.x-p2.x)*(p3.y-p4.y))-((p1.y-p2.y)*(p3.x-p4.x));
+			float yNum = ((p1.x*p2.y-p1.y*p2.x)*(p3.y-p4.y)) - ((p1.y-p2.y)*(p3.x*p4.y-p3.y*p4.x));
+			float yDenom = ((p1.x - p2.x)*(p3.y - p4.y))-((p1.y - p2.y)*(p3.x - p4.x));
+			intersection = new Vector2D(xNum / xDenom, yNum / yDenom);
 		}
+		
+		if(intersection.dist(center) < radius) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public Vector2D perp() {
+		return new Vector2D(-y, x);
 	}
 	
 	/**
@@ -100,5 +122,23 @@ public class Vector2D {
 		this.y = y;
 	}
 	
+	public boolean isVerticle () {
+		if(x == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
+	public boolean isHorizontal () {
+		if(y == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public float dist (Vector2D v) {
+		return (float) Math.sqrt(Math.pow(x-v.x, 2) + Math.pow(y-v.y, 2));
+	}
 }

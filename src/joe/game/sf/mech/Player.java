@@ -15,7 +15,7 @@ public class Player {
 		walkAcc = 0.4f;
 		directionAngle = 1;
 		turnSpeed = 0.2f;
-		this.playerRadius = 50;
+		this.playerRadius = 25;
 	}
 	
 	/**
@@ -36,10 +36,8 @@ public class Player {
 	 */
 	public void shoot (Player[] players, int self) {
 		for(int i=0; i<players.length; i++) {
-			Vector2D intersection = Vector2D.lineCircle(location, Vector2D.add(location, Vector2D.mult(direction, 10)), players[i].getLocation(), players[i].getPlayerRadius());
-			if(intersection != null && i!=self){
+			if(players[i]!= this && Vector2D.lineCircle(location, Vector2D.add(location, Vector2D.mult(direction, 10)), players[i].getLocation(), players[i].getPlayerRadius())){
 				players[i].die();
-				System.out.format("%f, %f\n", intersection.getX(), intersection.getY());
 			}
 		}
 	}

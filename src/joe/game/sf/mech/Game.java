@@ -67,12 +67,13 @@ public class Game {
 		
 		for(Player p : players) {
 			if(!p.isDead()) {
-				g.drawImage(ImageBank.getImage("blue"), 
-						(int)p.getLocation().getX()-(p.getPlayerRadius())/2,
-					    (int)p.getLocation().getY()-(p.getPlayerRadius())/2,
-					    p.getPlayerRadius(),
-					    p.getPlayerRadius(),
+				g.drawImage(ImageBank.getImage("blue"), //the image is twice the XxY as the actual circle
+						(int)p.getLocation().getX()-(p.getPlayerRadius()*2)/2,
+					    (int)p.getLocation().getY()-(p.getPlayerRadius()*2)/2,
+					    p.getPlayerRadius()*2,
+					    p.getPlayerRadius()*2,
 					    null);
+				
 				g.setColor(Color.WHITE);
 				g.drawLine((int)p.getLocation().getX(),
 						   (int)p.getLocation().getY(), 
