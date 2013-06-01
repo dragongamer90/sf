@@ -2,6 +2,7 @@ package joe.game.sf.mech;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import joe.game.sf.ImageBank;
 
@@ -11,6 +12,10 @@ public class Game {
 	Player[] players = {new Player(1,1,1), new Player(1,1,1)};
 	private boolean left, right, up, down, turnRight, turnLeft;
 	private float frictionCoeff = -0.1f;
+	private BufferedImage cameraBuffer;
+	private Graphics cameraGraphics;
+	private int mapWidth, mapHeight;
+	private Camera camera;
 	
 	/**
 	 * @param width
@@ -18,8 +23,13 @@ public class Game {
 	 */
 	public Game(int width, int height) {
 		super();
+		mapWidth = 1000;
+		mapHeight = 1000;
 		this.width = width;
 		this.height = height;
+		cameraBuffer = new BufferedImage(mapWidth, mapHeight, BufferedImage.TYPE_INT_ARGB);
+		cameraGraphics = cameraBuffer.getGraphics();
+		camera = new Camera((int)players[0].getLocation().getX() - 500, (int)players[0].getLocation().getY() - 500, 1000, 1000, width, height);
 	}
 
 	public void update () {
@@ -28,6 +38,7 @@ public class Game {
 		for(Player p : players) {
 			p.update();
 		}
+		camera.update((int)players[0].getLocation().getX() - camera.getWidth()/2, (int)players[0].getLocation().getY() - camera.getHeight()/2);
 	}
 	
 	public void processInput() {
@@ -62,23 +73,27 @@ public class Game {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
+		cameraGraphics.setColor(Color.BLACK);
+		cameraGraphics.fillRect(0, 0, width, height);
 		
 		for(Player p : players) {
 			if(!p.isDead()) {
-				g.drawImage(ImageBank.getImage("blue"), //the image is twice the XxY as the actual circle
+				cameraGraphics.drawImage(ImageBank.getImage("blue"), //the image is twice the XxY as the actual circle
 						(int)p.getLocation().getX()-(p.getPlayerRadius()*2)/2,
 					    (int)p.getLocation().getY()-(p.getPlayerRadius()*2)/2,
 					    p.getPlayerRadius()*2,
 					    p.getPlayerRadius()*2,
 					    null);
 				
-				g.setColor(Color.WHITE);
-				g.drawLine((int)p.getLocation().getX(),
+				cameraGraphics.setColor(Color.WHITE);
+				cameraGraphics.drawLine((int)p.getLocation().getX(),
 						   (int)p.getLocation().getY(), 
 						   (int)p.getLocation().getX() + (int)(p.getDirection().getX()*20), 
 						   (int)p.getLocation().getY() + (int)(p.getDirection().getY()*20));
+				g.drawImage(cameraBuffer, 0, 0, width, height, camera.getX(), camera.getY(),
+							camera.getX() + camera.getWidth(), camera.getY() + camera.getHeight(), null);
 			}
 		}
 	}

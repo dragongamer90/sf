@@ -16,13 +16,25 @@ public class Camera {
 		centerY = height / 2;
 	}
 	
-	public void update(int mouseX, int mouseY){
-		lx = mouseX - centerX;
-		ly = mouseY - centerY;
-		lx = (int) (lx * 0.03);
-		ly = (int) (ly * 0.03);
-		x += lx;
-		y += ly;
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void update(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**
