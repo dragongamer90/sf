@@ -16,3 +16,9 @@ I am trying to create an environment different to that of Call of Duty and Battl
   In thease games players run around chaotically and work by themselves to increase their stats. This game
   will focus on encouraging team cooperation by introducing aspects such as permadeath and physical game play
   being effected by team member deaths.
+
+Inspiration
+-----------
+
+* The graphics style is inspired by the game Frozen Synaps (although the gameplay is completely different).
+* I am very interested in making games that trigger strong emotional responses in players.
